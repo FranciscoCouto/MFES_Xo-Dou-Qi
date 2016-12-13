@@ -1,0 +1,43 @@
+class Board
+/*
+class responsible for the variables and operations of all the subclasses(types of pieces in the game)
+*/
+values --Board is a 7x9 rectangle = 63 tiles
+		public XSize: nat1 = 7;
+		public YSize: nat1 = 9;
+instance variables
+		private board: seq of seq of Tile := [[]];
+		private static boardInstance:Board := new Board(); --Board singleton
+operations
+
+--builds small board
+		private buildBoard: seq of nat1 ==> Tile
+		buildBoard(a_coords) == (
+			let piece =
+			  cases a_coords:
+			     [1,2], [1,2], [1,2], [1,2] -> new Cat(<Blue>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Cat(<Red>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Dog(<Blue>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Dog(<Red>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Elephant(<Blue>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Elephant(<Red>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Leopard(<Blue>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Leopard(<Red>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Lion(<Blue>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Lion(<Red>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Rat(<Blue>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Rat(<Red>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Tiger(<Blue>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Tiger(<Red>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Wolf(<Blue>, 1),
+			     [1,2], [1,2], [1,2], [1,2] -> new Wolf(<Red>, 1),
+			     others -> nil
+			  end
+			in  
+				if(piece <> nil)
+					then return new Tile(a_coords, piece)
+				else
+					return new Tile(a_coords);
+		);
+
+end Board

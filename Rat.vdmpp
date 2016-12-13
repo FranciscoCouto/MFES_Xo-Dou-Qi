@@ -1,0 +1,11 @@
+class Rat is subclass of Piece
+/*
+class responsible for the pieces of type Rat
+*/
+operations
+	public Rat : Color * nat1 ==> Rat
+			Rat(a_color, a_value) ==(
+				Piece(a_color, a_value);
+			);
+
+end Rat

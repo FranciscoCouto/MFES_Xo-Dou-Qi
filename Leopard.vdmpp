@@ -1,0 +1,11 @@
+class Leopard is subclass of Piece
+/*
+class responsible for the pieces of type Leopard
+*/
+operations
+	public Leopard : Color * nat1 ==> Leopard
+			Leopard(a_color, a_value) ==(
+				Piece(a_color, a_value);
+			);
+
+end Leopard

@@ -1,0 +1,11 @@
+class Dog is subclass of Piece
+/*
+class responsible for the pieces of type Dog
+*/
+operations
+	public Dog : Color * nat1 ==> Dog
+			Dog(a_color, a_value) ==(
+				Piece(a_color, a_value);
+			);
+
+end Dog

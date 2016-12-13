@@ -1,0 +1,42 @@
+class Piece
+/*
+class responsible for the variables and operations of all the subclasses(types of pieces in the game)
+*/
+types
+	public Color = <Blue> | <Red>; -- Defines the player to whom that piece belong
+values
+-- Correspond to global variables such as PI
+instance variables
+	public color: Color;
+	public value: nat1;
+	
+operations --Correspond to operations in UML, methods in Java, and memberfunctions in C++ 
+	public Piece : Color * nat1 ==> Piece
+	Piece(a_color, a_value) ==(
+		color := a_color;
+		value := a_value;
+		return self;
+	);
+	
+	--returns the color of the piece
+	public getColor : () ==> Color
+	getColor() ==(
+		return self.color;
+	);
+	
+		--returns the color of the piece
+	public getValue : () ==> nat1
+	getValue() ==(
+		return self.value;
+	);
+		
+	/*
+	public canMoveTo : seq of nat1  ==> bool
+	canMoveTo(new_coord) 
+		== is subclass responsibility;
+		
+	public MoveTo : seq of nat1  ==> ()
+	MoveTo(new_coord) 
+		== is subclass responsibility;*/
+
+end Piece

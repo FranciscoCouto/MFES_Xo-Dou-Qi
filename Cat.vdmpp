@@ -1,0 +1,11 @@
+class Cat is subclass of Piece
+/*
+class responsible for the pieces of type Cat
+*/
+operations
+		public Cat : Color * nat1 ==> Cat
+			Cat(a_color, a_value) ==(
+				Piece(a_color, a_value);
+			);
+
+end Cat

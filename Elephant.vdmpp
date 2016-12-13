@@ -1,0 +1,11 @@
+class Elephant is subclass of Piece
+/*
+class responsible for the pieces of type Elephant
+*/
+operations
+	public Elephant : Color * nat1 ==> Elephant
+			Elephant(a_color, a_value) ==(
+				Piece(a_color, a_value);
+			);
+
+end Elephant

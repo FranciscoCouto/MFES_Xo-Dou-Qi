@@ -1,0 +1,11 @@
+class Wolf is subclass of Piece
+/*
+class responsible for the pieces of type Wolf
+*/
+operations
+	public Wolf : Color * nat1 ==> Wolf
+			Wolf(a_color, a_value) ==(
+				Piece(a_color, a_value);
+			);
+
+end Wolf

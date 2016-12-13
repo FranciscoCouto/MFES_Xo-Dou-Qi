@@ -1,0 +1,11 @@
+class Tiger is subclass of Piece
+/*
+class responsible for the pieces of type Tiger
+*/
+operations
+	public Tiger : Color * nat1 ==> Tiger
+			Tiger(a_color, a_value) ==(
+				Piece(a_color, a_value);
+			);
+
+end Tiger

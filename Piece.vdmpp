@@ -11,7 +11,7 @@ instance variables
 	public value: nat1;
 	
 operations --Correspond to operations in UML, methods in Java, and memberfunctions in C++ 
-	public Piece : Color * nat1 ==> Piece
+	protected Piece : Color * nat1 ==> Piece
 	Piece(a_color, a_value) ==(
 		color := a_color;
 		value := a_value;
@@ -24,19 +24,15 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 		return self.color;
 	);
 	
-		--returns the color of the piece
+	--returns the color of the piece
 	public getValue : () ==> nat1
 	getValue() ==(
 		return self.value;
 	);
 		
-	/*
-	public canMoveTo : seq of nat1  ==> bool
-	canMoveTo(new_coord) 
+	--checks if a piece in a certain tile can move to another one
+	public canMoveTo : Tile * Tile  ==> bool
+	canMoveTo(ti, tf) 
 		== is subclass responsibility;
-		
-	public MoveTo : seq of nat1  ==> ()
-	MoveTo(new_coord) 
-		== is subclass responsibility;*/
 
 end Piece

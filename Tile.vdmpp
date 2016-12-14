@@ -7,6 +7,10 @@ instance variables
 		private river: bool; --this tile has water
 		private coordinates: seq of nat1; --tile coordinates, integrity check with board coordinates
 		private piece: [Piece]; --Piece on tile, can be null if there is none
+		
+		inv coordinates(1) in set {1, ..., Board`XSize} and
+				coordinates(2) in set {1, ..., Board`YSize}
+		
 operations
 		--Tile constuctor
 		public Tile: seq of nat1 ==> Tile

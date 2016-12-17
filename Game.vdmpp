@@ -1,0 +1,64 @@
+class Game
+types
+	public Player = <Player1> | <Player2>;
+
+instance variables
+	private board : Board := new Board();
+	private currentPlayer: Player;
+	
+operations
+
+		--Game constructor
+		public Game: () ==> Game
+    Game() == (
+			board := Board`getInstance();
+			board.buildBoard();
+			currentPlayer := <Player1>;
+    ); 
+    
+    
+    public changePlayer: () ==> ()
+    changePlayer() == (
+    	if currentPlayer = <Player1> then currentPlayer := <Player2>
+    	else currentPlayer := <Player1>;
+
+    )   
+		post currentPlayer <> currentPlayer~;
+		
+		public movePieceTo: seq of nat1 * seq of nat1 ==> bool
+    movePieceTo(i_coords, f_coords) == (
+    	if(board.getTile(i_coords).getPiece() <> nil 
+    		and ((board.getTile(i_coords).getPiece().getColor() = <Blue> and currentPlayer = <Player1>) or (board.getTile(i_coords).getPiece().getColor() = <Red> and currentPlayer = <Player2>)))
+    			then(
+    					if(board.getTile(i_coords).getPiece().canMoveTo(board.getTile(i_coords),board.getTile(f_coords)))
+    							then (
+    								board.getTile(f_coords).setPiece(board.getTile(i_coords).getPiece());
+    								board.getTile(i_coords).setPiece(nil);
+    								return true;
+    								)
+    					else return false;
+            ) 
+     else return false;     		
+    );
+		
+		public checkGameOver: () ==> bool
+		checkGameOver() == (
+			if((board.getTile([4,1]).getPiece() <> nil and board.getTile([4,1]).getPiece().getColor() = <Red>) or
+				  (board.getTile([4,9]).getPiece() <> nil and board.getTile([4,9]).getPiece().getColor() = <Blue>))
+				then return true;
+			return false;
+		);
+		
+		pure public getBoard : () ==> Board
+  	getBoard() ==
+  	(
+  		return board;
+  	);
+  	
+  	pure public getcurrentPlayer : () ==> Player
+  	getcurrentPlayer() ==
+  	(
+  		return currentPlayer;
+  	);
+
+end Game

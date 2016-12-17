@@ -5,6 +5,8 @@ class responsible for the variables and operations of all the tiles that togethe
 instance variables
 		private traps: bool; --this tile has a trap
 		private river: bool; --this tile has water
+		private blue_lair: bool;
+		private red_lair: bool;
 		private coordinates: seq of nat1; --tile coordinates, integrity check with board coordinates
 		private piece: [Piece]; --Piece on tile, can be null if there is none
 		
@@ -22,7 +24,8 @@ operations
 				river := ((coord(1) = 2 and coord(2) = 4) or (coord(1) = 3 and coord(2) = 4) or (coord(1) = 5 and coord(2) = 4) or (coord(1) = 6 and coord(2) = 4)
 								or (coord(1) = 2 and coord(2) = 5) or (coord(1) = 3 and coord(2) = 5) or (coord(1) = 5 and coord(2) = 5) or (coord(1) = 6 and coord(2) = 5)
 								or (coord(1) = 2 and coord(2) = 6) or (coord(1) = 3 and coord(2) = 6) or (coord(1) = 5 and coord(2) = 6) or (coord(1) = 6 and coord(2) = 6));	
-				--special:= ([0,2] and [0,4] and [1,3]); -- completar
+				blue_lair := (coord(1) = 4 and coord(2) = 1);
+				red_lair := (coord(1) = 4 and coord(2) = 9);
 				return self;
 		);
 		
@@ -30,16 +33,18 @@ operations
 		public Tile: seq of nat1 * Piece ==> Tile
 				Tile(coord, p) == (
 				coordinates := coord;
-								traps := ((coord(1) = 3 and coord(2) = 1) or (coord(1) = 5 and coord(2) = 1) or (coord(1) = 4 and coord(2) = 2)
+				traps := ((coord(1) = 3 and coord(2) = 1) or (coord(1) = 5 and coord(2) = 1) or (coord(1) = 4 and coord(2) = 2)
 										or (coord(1) = 3 and coord(2) = 9) or (coord(1) = 5 and coord(2) = 9) or (coord(1) = 4 and coord(2) = 8));
 				river := ((coord(1) = 2 and coord(2) = 4) or (coord(1) = 3 and coord(2) = 4) or (coord(1) = 5 and coord(2) = 4) or (coord(1) = 6 and coord(2) = 4)
 								or (coord(1) = 2 and coord(2) = 5) or (coord(1) = 3 and coord(2) = 5) or (coord(1) = 5 and coord(2) = 5) or (coord(1) = 6 and coord(2) = 5)
-								or (coord(1) = 2 and coord(2) = 6) or (coord(1) = 3 and coord(2) = 6) or (coord(1) = 5 and coord(2) = 6) or (coord(1) = 6 and coord(2) = 6));	
+								or (coord(1) = 2 and coord(2) = 6) or (coord(1) = 3 and coord(2) = 6) or (coord(1) = 5 and coord(2) = 6) or (coord(1) = 6 and coord(2) = 6));
+				blue_lair := (coord(1) = 4 and coord(2) = 1);
+				red_lair := (coord(1) = 4 and coord(2) = 9);	
 				piece := p;
 				return self
 		);
 		
-				--method get coordinates
+		--method get coordinates
 		pure public getCoordinates: () ==> seq of nat1
 		getCoordinates() == return coordinates;
 		

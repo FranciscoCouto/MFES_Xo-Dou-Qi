@@ -34,5 +34,50 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 	public canMoveTo : Tile * Tile  ==> bool
 	canMoveTo(ti, tf) 
 		== is subclass responsibility;
+		
+	public isAllRiverH: Tile * Tile ==> bool
+	isAllRiverH(ti, tf) == (
+
+			if((ti.getCoordinates()(2) = tf.getCoordinates()(2)) = false)
+				then return false
+			else(
+			
+				dcl tempx: nat1 := ti.getCoordinates()(1) + 1;		
+				
+				while (tempx < tf.getCoordinates()(1)) do(
+					dcl tempT: Tile := new Tile([tempx, ti.getCoordinates()(2)]);
+					if(tempT.isRiver() = false or is_Rat(tempT.getPiece()))
+						then return false
+					else
+						tempx := tempx + 1;
+					);
+					
+				return true;
+						
+				)
+	);
+	
+	public isAllRiverV: Tile * Tile ==> bool
+	isAllRiverV(ti, tf) == (
+	
+			if((ti.getCoordinates()(1) = tf.getCoordinates()(1)) = false)
+				then return false
+			else(
+			
+				dcl tempy: nat1 := ti.getCoordinates()(2) + 1;		
+				
+				while (tempy < tf.getCoordinates()(1)) do(
+					dcl tempT: Tile := new Tile([ti.getCoordinates()(1), tempy]);
+					if(tempT.isRiver() = false or is_Rat(tempT.getPiece()))
+						then return false
+					else
+						tempy := tempy + 1;
+					);
+					
+				return true;
+						
+				)
+				
+	);
 
 end Piece

@@ -8,13 +8,13 @@ operations
 				Piece(a_color, a_value);
 			);
 			
-	--checks if a piece in a certain tile can move to another one
+--checks if a piece in a certain tile can move to another one
 	public canMoveTo : Tile * Tile  ==> bool
 	canMoveTo(ti, tf) 
-		==  if(abs(ti.getCoordinates()(1) - tf.getCoordinates()(1)) = 1 or abs(ti.getCoordinates()(2) - tf.getCoordinates()(2)) = 1)
-						then (return ti.getPiece().getValue() >= tf.getPiece().getValue() or tf.isTrap() = true)
+		==  if((abs(ti.getCoordinates()(1) - tf.getCoordinates()(1)) = 1 
+					or abs(ti.getCoordinates()(2) - tf.getCoordinates()(2)) = 1) and tf.isRiver() = false)
+						then (return ti.getPiece().getValue() >= tf.getPiece().getValue() or tf.isTrap() = true) 
 				else (return false;)
 	pre ti <> tf;
-	
 
 end Wolf

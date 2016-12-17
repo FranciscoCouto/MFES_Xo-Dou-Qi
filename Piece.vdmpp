@@ -11,7 +11,9 @@ instance variables
 	public value: nat1;
 	
 operations --Correspond to operations in UML, methods in Java, and memberfunctions in C++ 
-	protected Piece : Color * nat1 ==> Piece
+
+	--Piece constructor
+	public Piece : Color * nat1 ==> Piece
 	Piece(a_color, a_value) ==(
 		color := a_color;
 		value := a_value;
@@ -19,13 +21,13 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 	);
 	
 	--returns the color of the piece
-	public getColor : () ==> Color
+	pure public getColor : () ==> Color
 	getColor() ==(
 		return self.color;
 	);
 	
 	--returns the color of the piece
-	public getValue : () ==> nat1
+	pure public getValue : () ==> nat1
 	getValue() ==(
 		return self.value;
 	);
@@ -35,6 +37,7 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 	canMoveTo(ti, tf) 
 		== is subclass responsibility;
 		
+	--checks special types of movements across rivers horizontally (lions and tigers)
 	public isAllRiverH: Tile * Tile ==> bool
 	isAllRiverH(ti, tf) == (
 
@@ -57,6 +60,7 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 				)
 	);
 	
+	--checks special types of movements across rivers vertically (lions and tigers)
 	public isAllRiverV: Tile * Tile ==> bool
 	isAllRiverV(ti, tf) == (
 	

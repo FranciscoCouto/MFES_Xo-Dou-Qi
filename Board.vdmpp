@@ -10,7 +10,7 @@ instance variables
 		private static boardInstance:Board := new Board(); --Board singleton
 operations
 
---builds small board
+		--function responsible for building the game board with all the pieces in place and their corresponding values
 		public buildBoard: () ==> ()
 		buildBoard() == (
 		
@@ -33,9 +33,9 @@ operations
 				];
 		);
 		
-		--returns singleton
-		public static getInstance: () ==> Board
-		getInstance() == return boardInstance;
+		--returns the board singleton
+		public static getBoard: () ==> Board
+		getBoard() == return boardInstance;
 		
 		--get method for a board tile
 		pure public getTile: seq of nat1 ==> Tile

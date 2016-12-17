@@ -14,6 +14,7 @@ instance variables
 				coordinates(2) in set {1, ..., Board`YSize}
 		
 operations
+
 		--Tile constuctor
 		public Tile: seq of nat1 ==> Tile
 		Tile(coord) == (
@@ -44,22 +45,23 @@ operations
 				return self
 		);
 		
-		--method get coordinates
+		--returns the coordinates of that tile
 		pure public getCoordinates: () ==> seq of nat1
 		getCoordinates() == return coordinates;
 		
-		--method get piece
+		--returns the piece in that tile
 		pure public getPiece: () ==> [Piece]
 		getPiece() == return piece;
 		
-		--method is special tile
+		--returns whether on that tile lies a trap or not
 		pure public isTrap: () ==> bool
 		isTrap() == return traps;
 		
+		--returns whether that trap is a river or not
 		pure public isRiver: () ==> bool
 		isRiver() == return river;
 		
-		--method set piece
+		--method to set the piece that lies on the tile
 		public setPiece: [Piece] ==> ()
 		setPiece(p) == piece := p;
 		

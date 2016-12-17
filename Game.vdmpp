@@ -1,4 +1,7 @@
 class Game
+/*
+class responsible for game logic - Piece Movement and Player Turns
+*/
 types
 	public Player = <Player1> | <Player2>;
 
@@ -11,12 +14,13 @@ operations
 		--Game constructor
 		public Game: () ==> Game
     Game() == (
-			board := Board`getInstance();
+			board := Board`getBoard();
 			board.buildBoard();
 			currentPlayer := <Player1>;
+			return self;
     ); 
     
-    
+    --method used to change the player that will play this turn
     public changePlayer: () ==> ()
     changePlayer() == (
     	if currentPlayer = <Player1> then currentPlayer := <Player2>
@@ -25,6 +29,7 @@ operations
     )   
 		post currentPlayer <> currentPlayer~;
 		
+		--method used to, according all restrictions, change a piece from place
 		public movePieceTo: seq of nat1 * seq of nat1 ==> bool
     movePieceTo(i_coords, f_coords) == (
     	if(board.getTile(i_coords).getPiece() <> nil 
@@ -39,8 +44,10 @@ operations
     					else return false;
             ) 
      else return false;     		
-    );
+    )
+    pre i_coords <> f_coords;
 		
+		--method to check if any player won already
 		public checkGameOver: () ==> bool
 		checkGameOver() == (
 			if((board.getTile([4,1]).getPiece() <> nil and board.getTile([4,1]).getPiece().getColor() = <Red>) or
@@ -49,12 +56,14 @@ operations
 			return false;
 		);
 		
+		--returns the actual gaming board
 		pure public getBoard : () ==> Board
   	getBoard() ==
   	(
   		return board;
   	);
   	
+  	--returns the player whose turn it is to play
   	pure public getcurrentPlayer : () ==> Player
   	getcurrentPlayer() ==
   	(

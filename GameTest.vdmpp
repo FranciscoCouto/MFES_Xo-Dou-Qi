@@ -1,0 +1,23 @@
+class GameTest
+
+instance variables
+	g: Game := new Game();
+operations
+	private assertTrue: bool ==> ()
+                assertTrue(cond) == return
+                pre cond;
+                
+  private testmovePieceTo: () ==> ()
+                testmovePieceTo() ==
+                (
+                        assertTrue(g.movePieceTo([3,1],[2,1]));
+                        assertTrue(g.movePieceTo([1,7],[1,6]));
+                );
+
+	public static main: () ==> ()
+                main() ==
+                (
+                        new GameTest().testmovePieceTo();
+                        
+                );
+end GameTest

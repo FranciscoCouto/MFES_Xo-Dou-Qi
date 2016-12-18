@@ -44,8 +44,7 @@ operations
     					else return false;
             ) 
      else return false;     		
-    )
-    pre i_coords <> f_coords;
+    );
 		
 		--method to check if any player won already
 		public checkGameOver: () ==> bool

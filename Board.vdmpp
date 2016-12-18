@@ -40,7 +40,7 @@ operations
 		--get method for a board tile
 		pure public getTile: seq of nat1 ==> Tile
 		getTile(a_coords) == (
-				return board(a_coords(1))(a_coords(2));
+				return board(a_coords(2))(a_coords(1));
 		);
 
 end Board

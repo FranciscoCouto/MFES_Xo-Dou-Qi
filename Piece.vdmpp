@@ -17,7 +17,6 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 	Piece(a_color, a_value) ==(
 		color := a_color;
 		value := a_value;
-		return self;
 	);
 	
 	--returns the color of the piece
@@ -83,5 +82,18 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 				)
 				
 	);
+	
+		--method used to, according all restrictions, change a piece from place
+		public movePieceTo: Tile * Tile ==> bool
+    movePieceTo(ti, tf) == (
+    					if(ti.getPiece().canMoveTo(ti,tf))
+    							then (
+    								tf.setPiece(ti.getPiece());
+    								ti.setPiece(nil);
+    								return true;
+    								)
+    					else return false;   		
+    )
+    pre ti.getPiece() <> nil;
 
 end Piece

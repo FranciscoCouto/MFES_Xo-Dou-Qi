@@ -1,23 +1,239 @@
 class GameTest
 
-instance variables
-	g: Game := new Game();
 operations
 	private assertTrue: bool ==> ()
                 assertTrue(cond) == return
                 pre cond;
                 
-  private testmovePieceTo: () ==> ()
-                testmovePieceTo() ==
+  private testCatMovement: () ==> ()
+                testCatMovement() ==
                 (
-                        assertTrue(g.movePieceTo([3,1],[2,1]));
-                        assertTrue(g.movePieceTo([1,7],[1,6]));
+                        dcl c: Piece := new Cat(<Red>, 2);
+                        dcl r: Piece := new Rat(<Blue>, 1);
+                        dcl l: Piece := new Lion(<Blue>, 7);
+                        
+										  	dcl t1:Tile := new Tile([1,1],c);
+										  	dcl t2:Tile := new Tile([1,2]);
+										  	dcl t3:Tile := new Tile([2,1]);
+										  	dcl t4:Tile := new Tile([2,2]);
+										  	
+										  	dcl t5:Tile := new Tile([1,2],r);
+										  	dcl t6:Tile := new Tile([1,2],l);
+										  	
+										  	assertTrue(c.canMoveTo(t1, t2)); -- vertical movement
+										  	assertTrue(c.canMoveTo(t1, t3)); -- horizontal movement
+										  	assertTrue(c.canMoveTo(t1, t4) = false); -- diagonal movement
+										  	
+										  	assertTrue(c.canMoveTo(t1, t5)); -- horizontal movement eating a weaker creature
+										  	assertTrue(c.canMoveTo(t1, t6) = false); -- horizontal movement but with a stronger creature
                 );
+                
+  private testDogMovement: () ==> ()
+                testDogMovement() ==
+                (
+                        dcl d: Piece := new Dog(<Red>, 3);
+                        dcl r: Piece := new Rat(<Blue>, 1);
+                        dcl l: Piece := new Lion(<Blue>, 7);
+                        
+										  	dcl t1:Tile := new Tile([1,1],d);
+										  	dcl t2:Tile := new Tile([1,2]);
+										  	dcl t3:Tile := new Tile([2,1]);
+										  	dcl t4:Tile := new Tile([2,2]);
+										  	
+										  	dcl t5:Tile := new Tile([1,2],r);
+										  	dcl t6:Tile := new Tile([1,2],l);
+										  	
+										  	assertTrue(d.canMoveTo(t1, t2)); -- vertical movement
+										  	assertTrue(d.canMoveTo(t1, t3)); -- horizontal movement
+										  	assertTrue(d.canMoveTo(t1, t4) = false); -- diagonal movement
+										  	
+										  	assertTrue(d.canMoveTo(t1, t5)); -- horizontal movement eating a weaker creature
+										  	assertTrue(d.canMoveTo(t1, t6) = false); -- horizontal movement but with a stronger creature
+                );
+                
+   private testElephantMovement: () ==> ()
+							  testElephantMovement() ==
+							  (
+							          dcl d: Piece := new Dog(<Red>, 3);
+							          dcl r: Piece := new Rat(<Blue>, 1);
+							          dcl l: Piece := new Lion(<Blue>, 7);
+							          
+										  	dcl t1:Tile := new Tile([1,1],d);
+										  	dcl t2:Tile := new Tile([1,2]);
+										  	dcl t3:Tile := new Tile([2,1]);
+										  	dcl t4:Tile := new Tile([2,2]);
+										  	
+										  	dcl t5:Tile := new Tile([1,2],r);
+										  	dcl t6:Tile := new Tile([1,2],l);
+										  	
+										  	assertTrue(d.canMoveTo(t1, t2)); -- vertical movement
+										  	assertTrue(d.canMoveTo(t1, t3)); -- horizontal movement
+										  	assertTrue(d.canMoveTo(t1, t4) = false); -- diagonal movement
+										  	
+										  	assertTrue(d.canMoveTo(t1, t5)); -- horizontal movement eating a weaker creature
+										  	assertTrue(d.canMoveTo(t1, t6) = false); -- horizontal movement but with a stronger creature
+  );
+  
+   private testLeopardMovement: () ==> ()
+							  testLeopardMovement() ==
+							  (
+							          dcl leo: Piece := new Leopard(<Red>, 5);
+							          dcl r: Piece := new Rat(<Blue>, 1);
+							          dcl l: Piece := new Lion(<Blue>, 7);
+							          
+										  	dcl t1:Tile := new Tile([1,1],leo);
+										  	dcl t2:Tile := new Tile([1,2]);
+										  	dcl t3:Tile := new Tile([2,1]);
+										  	dcl t4:Tile := new Tile([2,2]);
+										  	
+										  	dcl t5:Tile := new Tile([1,2],r);
+										  	dcl t6:Tile := new Tile([1,2],l);
+										  	
+										  	assertTrue(leo.canMoveTo(t1, t2)); -- vertical movement
+										  	assertTrue(leo.canMoveTo(t1, t3)); -- horizontal movement
+										  	assertTrue(leo.canMoveTo(t1, t4) = false); -- diagonal movement
+										  	
+										  	assertTrue(leo.canMoveTo(t1, t5)); -- horizontal movement eating a weaker creature
+										  	assertTrue(leo.canMoveTo(t1, t6) = false); -- horizontal movement but with a stronger creature
+  );
+  
+     private testLionMovement: () ==> ()
+							  testLionMovement() ==
+							  (
+							          dcl d: Piece := new Dog(<Red>, 3);
+							          dcl r: Piece := new Rat(<Blue>, 1);
+							          dcl l: Piece := new Lion(<Blue>, 7);
+							          
+										  	dcl t1:Tile := new Tile([1,1],d);
+										  	dcl t2:Tile := new Tile([1,2]);
+										  	dcl t3:Tile := new Tile([2,1]);
+										  	dcl t4:Tile := new Tile([2,2]);
+										  	
+										  	dcl t5:Tile := new Tile([1,2],r);
+										  	dcl t6:Tile := new Tile([1,2],l);
+										  	
+										  	assertTrue(d.canMoveTo(t1, t2)); -- vertical movement
+										  	assertTrue(d.canMoveTo(t1, t3)); -- horizontal movement
+										  	assertTrue(d.canMoveTo(t1, t4) = false); -- diagonal movement
+										  	
+										  	assertTrue(d.canMoveTo(t1, t5)); -- horizontal movement eating a weaker creature
+										  	assertTrue(d.canMoveTo(t1, t6) = false); -- horizontal movement but with a stronger creature
+  );
+  
+       private testRatMovement: () ==> ()
+							  testRatMovement() ==
+							  (
+							          dcl d: Piece := new Dog(<Red>, 3);
+							          dcl r: Piece := new Rat(<Blue>, 1);
+							          dcl l: Piece := new Lion(<Blue>, 7);
+							          
+										  	dcl t1:Tile := new Tile([1,1],d);
+										  	dcl t2:Tile := new Tile([1,2]);
+										  	dcl t3:Tile := new Tile([2,1]);
+										  	dcl t4:Tile := new Tile([2,2]);
+										  	
+										  	dcl t5:Tile := new Tile([1,2],r);
+										  	dcl t6:Tile := new Tile([1,2],l);
+										  	
+										  	assertTrue(d.canMoveTo(t1, t2)); -- vertical movement
+										  	assertTrue(d.canMoveTo(t1, t3)); -- horizontal movement
+										  	assertTrue(d.canMoveTo(t1, t4) = false); -- diagonal movement
+										  	
+										  	assertTrue(d.canMoveTo(t1, t5)); -- horizontal movement eating a weaker creature
+										  	assertTrue(d.canMoveTo(t1, t6) = false); -- horizontal movement but with a stronger creature
+  );
+  
+        private testTigerMovement: () ==> ()
+							  testTigerMovement() ==
+							  (
+							          dcl d: Piece := new Dog(<Red>, 3);
+							          dcl r: Piece := new Rat(<Blue>, 1);
+							          dcl l: Piece := new Lion(<Blue>, 7);
+							          
+										  	dcl t1:Tile := new Tile([1,1],d);
+										  	dcl t2:Tile := new Tile([1,2]);
+										  	dcl t3:Tile := new Tile([2,1]);
+										  	dcl t4:Tile := new Tile([2,2]);
+										  	
+										  	dcl t5:Tile := new Tile([1,2],r);
+										  	dcl t6:Tile := new Tile([1,2],l);
+										  	
+										  	assertTrue(d.canMoveTo(t1, t2)); -- vertical movement
+										  	assertTrue(d.canMoveTo(t1, t3)); -- horizontal movement
+										  	assertTrue(d.canMoveTo(t1, t4) = false); -- diagonal movement
+										  	
+										  	assertTrue(d.canMoveTo(t1, t5)); -- horizontal movement eating a weaker creature
+										  	assertTrue(d.canMoveTo(t1, t6) = false); -- horizontal movement but with a stronger creature
+  );
+  
+          private testWolfMovement: () ==> ()
+							  testWolfMovement() ==
+							  (
+							          dcl w: Piece := new Wolf(<Red>, 4);
+							          dcl r: Piece := new Rat(<Blue>, 1);
+							          dcl l: Piece := new Lion(<Blue>, 7);
+							          
+										  	dcl t1:Tile := new Tile([1,1],w);
+										  	dcl t2:Tile := new Tile([1,2]);
+										  	dcl t3:Tile := new Tile([2,1]);
+										  	dcl t4:Tile := new Tile([2,2]);
+										  	
+										  	dcl t5:Tile := new Tile([1,2],r);
+										  	dcl t6:Tile := new Tile([1,2],l);
+										  	
+										  	assertTrue(w.canMoveTo(t1, t2)); -- vertical movement
+										  	assertTrue(w.canMoveTo(t1, t3)); -- horizontal movement
+										  	assertTrue(w.canMoveTo(t1, t4) = false); -- diagonal movement
+										  	
+										  	assertTrue(w.canMoveTo(t1, t5)); -- horizontal movement eating a weaker creature
+										  	assertTrue(w.canMoveTo(t1, t6) = false); -- horizontal movement but with a stronger creature
+  );
+  
+            private testMovement: () ==> ()
+							  testMovement() ==
+							  (
+							  
+							  assertTrue(true);
+
+  );
+  
+              private testGame: () ==> ()
+							  testGame() ==
+							  (
+							  
+							  assertTrue(true);
+
+  );
+  
+              private testGameEnd: () ==> ()
+							  testGameEnd() ==
+							  (
+							  
+							  assertTrue(true);
+
+  );
 
 	public static main: () ==> ()
                 main() ==
-                (
-                        new GameTest().testmovePieceTo();
+                (				
+                
+                ------------- Movement Tests --------------------------------------------
+                
+                        new GameTest().testCatMovement();
+                        new GameTest().testDogMovement();
+                        new GameTest().testElephantMovement();
+                        new GameTest().testTigerMovement();
+                        new GameTest().testRatMovement();
+                        new GameTest().testLionMovement();
+                        new GameTest().testLeopardMovement();
+                        new GameTest().testWolfMovement();
                         
+                        new GameTest().testMovement();
+                        
+                ------------- Game Tests --------------------------------------------
+                        
+                        
+                        new GameTest().testGame();
+                        new GameTest().testGameEnd();
                 );
 end GameTest

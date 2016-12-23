@@ -45,13 +45,6 @@ operations
 				then return true;
 			return false;
 		);
-		
-		--returns the actual gaming board
-		pure public getBoard : () ==> Board
-  	getBoard() ==
-  	(
-  		return board;
-  	);
   	
   	--returns the player whose turn it is to play
   	pure public getcurrentPlayer : () ==> Player

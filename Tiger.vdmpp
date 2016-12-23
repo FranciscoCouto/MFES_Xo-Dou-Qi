@@ -20,7 +20,7 @@ operations
 						and tf.isRiver() = false)
 						then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue() or tf.isTrap() = true )) 
 				else if(isAllRiverH(ti,tf) or isAllRiverV(ti,tf))
-							then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue() or tf.isTrap() = true ))
+							then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue()))
 				else
 						return false;
 				)

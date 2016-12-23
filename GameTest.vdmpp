@@ -191,12 +191,18 @@ operations
 										  	
 										  	dcl t11:Tile := new Tile([4,5], r);
 										  	
+										  	dcl t12:Tile := new Tile([3,4]); ----river horizontal movement
+										  	dcl t13:Tile := new Tile([2,5]); ----river vertical movement
+										  	
+										  	
 										  	assertTrue(t.canMoveTo(t1, t2)); -- vertical movement
 										  	assertTrue(t.canMoveTo(t1, t3)); -- horizontal movement
 										  	assertTrue(t.canMoveTo(t1, t4) = false); -- diagonal movement
 										  	
 										  	assertTrue(t.canMoveTo(t1, t5)); --- jump the river vertically
+										  	assertTrue(t.canMoveTo(t1, t13)); --- jump the river vertically but fall in water
 										  	assertTrue(t.canMoveTo(t8, t9)); --- jump the river horizontally
+										  	assertTrue(t.canMoveTo(t8, t12)); --- jump the river horizontally but fall in water
 										  	
 										  	assertTrue(t.canMoveTo(t10, t11)); --- jump the river horizontally eating a rat
 										  	
@@ -234,6 +240,8 @@ operations
 							  dcl p: Piece := new Lion(<Blue>, 7);
 							  dcl p2: Piece := new Rat(<Red>, 1);
 							  dcl p3: Piece := new Wolf(<Red>, 4);
+
+								--dcl p4: Piece := new Lion(<Blue>, 7);
 							  
 							  
 						  	dcl tl1: Tile := new Tile([1,1], p);
@@ -245,6 +253,10 @@ operations
 						  	dcl tl5: Tile := new Tile([1,1], p3);
 						  	dcl tl6: Tile := new Tile([2,2]);
 						  	dcl tl7: Tile := new Tile([1,2]);
+						  	
+						  	--dcl tl8: Tile := new Tile([2,3], p4);
+						  	--dcl tl9: Tile := new Tile([2,7]);
+						  	--dcl tl10: Tile := new Tile([2,6]);
 						  	
 						  	assertTrue(p.movePieceTo(tl1, tl2));
 						  	assertTrue((tl2.getPiece() = nil) = false);
@@ -260,6 +272,11 @@ operations
 						  	assertTrue(p3.movePieceTo(tl7, tl6));
 						  	assertTrue((tl6.getPiece() = nil) = false);
 						  	assertTrue(tl7.getPiece() = nil);
+						  	
+						  	
+						  	----extra testing for river movements
+						  	--assertTrue(p4.isAllRiverV(tl8, tl10));
+						  	--assertTrue(p4.isAllRiverV(tl8, tl10));
 
   );
   
@@ -277,14 +294,92 @@ operations
 								g.changePlayer();
 								assertTrue(g.checkGameOver() = false);
 								assertTrue(g.getcurrentPlayer() = <Player1>);
+								
+								
+								-----extra test for bad movement
+								assertTrue(g.movePieceTo([2,1],[2,2]) = false);
 
   );
   
-              private testGameEnd: () ==> ()
-							  testGameEnd() ==
+              private testGameEndPlayer1: () ==> ()
+							  testGameEndPlayer1() ==
 							  (
 							  
-							  assertTrue(true);
+							  dcl g: Game := new Game();
+							  
+							  assertTrue(isofclass(Leopard, g.getBoard().getTile([3,3]).getPiece()));
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([3,3],[4,3]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,3],[4,4]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,4],[4,5]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,5],[4,6]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,6],[4,7]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,7],[4,8]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,8],[4,9]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver());
+
+  );
+  
+                private testGameEndPlayer2: () ==> ()
+							  testGameEndPlayer2() ==
+							  (
+							  
+							  dcl g: Game := new Game();
+							  
+							  g.changePlayer();
+							  
+							  assertTrue(isofclass(Wolf, g.getBoard().getTile([3,7]).getPiece()));
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([3,7],[4,7]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,7],[4,6]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,6],[4,5]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,5],[4,4]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,4],[4,3]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,3],[4,2]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver() = false);
+							  assertTrue(g.movePieceTo([4,2],[4,1]));
+							  g.changePlayer(); g.changePlayer();
+							  
+							  assertTrue(g.checkGameOver());
 
   );
 
@@ -309,6 +404,7 @@ operations
                         
                         
                         new GameTest().testGameTurns();
-                        new GameTest().testGameEnd();
+                        new GameTest().testGameEndPlayer1();
+                        new GameTest().testGameEndPlayer2();
                 );
 end GameTest

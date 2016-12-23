@@ -49,12 +49,15 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 				while (tempx < tf.getCoordinates()(1)) do(
 					dcl tempT: Tile := new Tile([tempx, ti.getCoordinates()(2)]);
 					if(tempT.isRiver() = false or is_Rat(tempT.getPiece()))
-						then return false
+						then (return false;)
 					else
 						tempx := tempx + 1;
 					);
 					
-				return true;
+				if(tempx = tf.getCoordinates()(1))
+					then return true
+				else
+					return false;
 						
 				)
 	);
@@ -64,20 +67,23 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 	isAllRiverV(ti, tf) == (
 	
 			if((ti.getCoordinates()(1) = tf.getCoordinates()(1)) = false)
-				then return false
+				then (return false;)
 			else(
 			
 				dcl tempy: nat1 := ti.getCoordinates()(2) + 1;		
 				
-				while (tempy < tf.getCoordinates()(1)) do(
+				while (tempy < tf.getCoordinates()(2)) do(
 					dcl tempT: Tile := new Tile([ti.getCoordinates()(1), tempy]);
-					if(tempT.isRiver() = false or is_Rat(tempT.getPiece()))
-						then return false
+					if((tempT.isRiver() = false) or (is_Rat(tempT.getPiece())))
+						then (return false;)
 					else
 						tempy := tempy + 1;
 					);
 					
-				return true;
+				if(tempy = tf.getCoordinates()(2))
+					then return true
+				else
+					return false;
 						
 				)
 				

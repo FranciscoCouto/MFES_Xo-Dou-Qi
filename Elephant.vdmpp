@@ -11,16 +11,14 @@ operations
 --checks if a piece in a certain tile can move to another one
 	public canMoveTo : Tile * Tile  ==> bool
 	canMoveTo(ti, tf) 
-		==  (
-				if(
+		==  if(
 						 (
 						 (abs(ti.getCoordinates()(1) - tf.getCoordinates()(1)) = 1 and ti.getCoordinates()(2) - tf.getCoordinates()(2) = 0) or 
 						 (abs(ti.getCoordinates()(2) - tf.getCoordinates()(2)) = 1 and ti.getCoordinates()(1) - tf.getCoordinates()(1) = 0)
 						 ) 
 						and tf.isRiver() = false)
-							then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue() or tf.isTrap() = true )) 
+							then (return true) 
 				else (return false;)
-				)
 	pre ti <> tf;
 	
 end Elephant

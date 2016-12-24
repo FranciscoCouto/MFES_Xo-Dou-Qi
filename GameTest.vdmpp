@@ -241,7 +241,7 @@ operations
 							  dcl p2: Piece := new Rat(<Red>, 1);
 							  dcl p3: Piece := new Wolf(<Red>, 4);
 
-								--dcl p4: Piece := new Lion(<Blue>, 7);
+								dcl p4: Piece := new Lion(<Blue>, 7);
 							  
 							  
 						  	dcl tl1: Tile := new Tile([1,1], p);
@@ -254,9 +254,13 @@ operations
 						  	dcl tl6: Tile := new Tile([2,2]);
 						  	dcl tl7: Tile := new Tile([1,2]);
 						  	
-						  	--dcl tl8: Tile := new Tile([2,3], p4);
-						  	--dcl tl9: Tile := new Tile([2,7]);
-						  	--dcl tl10: Tile := new Tile([2,6]);
+						  	dcl tl8: Tile := new Tile([2,3], p4);
+						  	dcl tl9: Tile := new Tile([2,7]);
+						  	dcl tl12: Tile := new Tile([2,8]);
+						  	
+						  	dcl tl10: Tile := new Tile([1,4], p4);
+						  	dcl tl11: Tile := new Tile([4,4]);
+						  	dcl tl13: Tile := new Tile([5,4]);
 						  	
 						  	assertTrue(p.movePieceTo(tl1, tl2));
 						  	assertTrue((tl2.getPiece() = nil) = false);
@@ -265,6 +269,8 @@ operations
 						  	assertTrue(p2.movePieceTo(tl3, tl4));
 						  	assertTrue((tl4.getPiece() = nil) = false);
 						  	assertTrue(tl3.getPiece() = nil);
+						  	
+						  	assertTrue(p3.movePieceTo(tl5, tl6) = false); ----extra testing for wrong movement
 						  	
 						  	assertTrue(p3.movePieceTo(tl5, tl7));
 						  	assertTrue((tl7.getPiece() = nil) = false);
@@ -275,9 +281,12 @@ operations
 						  	
 						  	
 						  	----extra testing for river movements
-						  	--assertTrue(p4.isAllRiverV(tl8, tl10));
-						  	--assertTrue(p4.isAllRiverV(tl8, tl10));
-
+						  	assertTrue(p4.isAllRiverV(tl8, tl9));
+						  	assertTrue(p4.isAllRiverV(tl8, tl12) = false);
+						  	
+						  	assertTrue(p4.isAllRiverH(tl10, tl11));
+						  	assertTrue(p4.isAllRiverH(tl10, tl13) = false);
+						  	
   );
   
               private testGameTurns: () ==> ()

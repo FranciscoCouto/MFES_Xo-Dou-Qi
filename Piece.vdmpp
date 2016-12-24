@@ -21,15 +21,13 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 	
 	--returns the color of the piece
 	pure public getColor : () ==> Color
-	getColor() ==(
+	getColor() ==
 		return self.color;
-	);
 	
 	--returns the color of the piece
 	pure public getValue : () ==> nat1
-	getValue() ==(
+	getValue() ==
 		return self.value;
-	);
 		
 	--checks if a piece in a certain tile can move to another one
 	public canMoveTo : Tile * Tile  ==> bool
@@ -40,10 +38,8 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 	public isAllRiverH: Tile * Tile ==> bool
 	isAllRiverH(ti, tf) == (
 
-			if((ti.getCoordinates()(2) = tf.getCoordinates()(2)) = false)
-				then return false
-			else(
-			
+		if(ti.getCoordinates()(2) = tf.getCoordinates()(2))			
+				then(
 				dcl tempx: nat1 := ti.getCoordinates()(1) + 1;		
 				
 				while (tempx < tf.getCoordinates()(1)) do(
@@ -53,22 +49,18 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 					else
 						tempx := tempx + 1;
 					);
-					
-				if(tempx = tf.getCoordinates()(1))
-					then return true
-				else
-					return false;
-						
+
+					return true;
 				)
+		else return false;
 	);
 	
 	--checks special types of movements across rivers vertically (lions and tigers)
 	public isAllRiverV: Tile * Tile ==> bool
 	isAllRiverV(ti, tf) == (
 	
-			if((ti.getCoordinates()(1) = tf.getCoordinates()(1)) = false)
-				then (return false;)
-			else(
+			if(ti.getCoordinates()(1) = tf.getCoordinates()(1))
+				then(
 			
 				dcl tempy: nat1 := ti.getCoordinates()(2) + 1;		
 				
@@ -79,14 +71,11 @@ operations --Correspond to operations in UML, methods in Java, and memberfunctio
 					else
 						tempy := tempy + 1;
 					);
-					
-				if(tempy = tf.getCoordinates()(2))
-					then return true
-				else
-					return false;
+
+					return true;
 						
 				)
-				
+			else return false;	
 	);
 	
 		--method used to, according all restrictions, change a piece from place

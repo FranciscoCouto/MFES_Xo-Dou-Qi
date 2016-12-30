@@ -1,0 +1,47 @@
+\begin{vdmpp}[breaklines=true]
+class Cat is subclass of Piece
+/*
+class responsible for the pieces of type Cat
+*/
+operations
+(*@
+\label{Cat:6}
+@*)
+ public Cat : Color * nat1 ==> Cat
+  Cat(a_color, a_value) ==(
+   Piece(a_color, a_value);
+  );
+   
+ --checks if a piece in a certain tile can move to another one
+(*@
+\label{canMoveTo:12}
+@*)
+ public canMoveTo : Tile * Tile  ==> bool
+ canMoveTo(ti, tf) 
+  ==  if(
+       (
+       (abs(ti.getCoordinates()(1) - tf.getCoordinates()(1)) = 1 and ti.getCoordinates()(2) - tf.getCoordinates()(2) = 0) or 
+       (abs(ti.getCoordinates()(2) - tf.getCoordinates()(2)) = 1 and ti.getCoordinates()(1) - tf.getCoordinates()(1) = 0)
+       ) 
+      and tf.isRiver() = false)
+       then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue() or tf.isTrap() = true )) 
+    else (return false;)
+ pre ti <> tf;
+ 
+end Cat
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Cat:6]{Cat} & 6&100.0\% & 7 \\
+\hline
+\hyperref[canMoveTo:12]{canMoveTo} & 12&100.0\% & 5 \\
+\hline
+\hline
+Cat.vdmpp & & 100.0\% & 12 \\
+\hline
+\end{longtable}
+

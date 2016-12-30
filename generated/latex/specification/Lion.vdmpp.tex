@@ -1,0 +1,53 @@
+\begin{vdmpp}[breaklines=true]
+class Lion is subclass of Piece
+/*
+class responsible for the pieces of type Lion
+*/
+operations
+(*@
+\label{Lion:6}
+@*)
+ public Lion : Color * nat1 ==> Lion
+   Lion(a_color, a_value) ==(
+    Piece(a_color, a_value);
+   );
+   
+ --checks if a piece in a certain tile can move to another one
+(*@
+\label{canMoveTo:12}
+@*)
+ public canMoveTo : Tile * Tile  ==> bool
+ canMoveTo(ti, tf) 
+  ==  (
+    if(
+       (
+       (abs(ti.getCoordinates()(1) - tf.getCoordinates()(1)) = 1 and ti.getCoordinates()(2) - tf.getCoordinates()(2) = 0) or 
+       (abs(ti.getCoordinates()(2) - tf.getCoordinates()(2)) = 1 and ti.getCoordinates()(1) - tf.getCoordinates()(1) = 0)
+       ) 
+      and tf.isRiver() = false)
+       then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue() or tf.isTrap() = true)) 
+    else if(isAllRiverH(ti,tf) or isAllRiverV(ti,tf))
+       then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue()))
+    else
+      return false;
+    )
+ pre ti <> tf;
+   
+
+end Lion
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Lion:6]{Lion} & 6&100.0\% & 15 \\
+\hline
+\hyperref[canMoveTo:12]{canMoveTo} & 12&100.0\% & 9 \\
+\hline
+\hline
+Lion.vdmpp & & 100.0\% & 24 \\
+\hline
+\end{longtable}
+

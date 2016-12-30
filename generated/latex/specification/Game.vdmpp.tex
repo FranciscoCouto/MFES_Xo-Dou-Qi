@@ -1,0 +1,106 @@
+\begin{vdmpp}[breaklines=true]
+class Game
+/*
+class responsible for game logic - Piece Movement and Player Turns
+*/
+types
+ public Player = <Player1> | <Player2>;
+
+instance variables
+ private board : Board := new Board();
+ private currentPlayer: Player;
+ 
+operations
+
+  --Game constructor
+(*@
+\label{Game:15}
+@*)
+  public Game: () ==> Game
+    Game() == (
+   board := Board`getBoard();
+   board.buildBoard();
+   currentPlayer := <Player1>;
+    ); 
+    
+    --method used to change the player that will play this turn
+(*@
+\label{changePlayer:23}
+@*)
+    public changePlayer: () ==> ()
+    changePlayer() == (
+     if currentPlayer = <Player1> then currentPlayer := <Player2>
+     else currentPlayer := <Player1>;
+
+    )   
+  post currentPlayer <> currentPlayer~;
+  
+  --method used to, according all restrictions, change a piece from place
+(*@
+\label{movePieceTo:32}
+@*)
+  public movePieceTo: seq of nat1 * seq of nat1 ==> bool
+    movePieceTo(i_coords, f_coords) == (
+     if(board.getTile(i_coords).getPiece() <> nil 
+       and ((board.getTile(i_coords).getPiece().getColor() = <Blue> and currentPlayer = <Player1>) or (board.getTile(i_coords).getPiece().getColor() = <Red> and currentPlayer = <Player2>)))
+      then return board.getTile(i_coords).getPiece().movePieceTo(board.getTile(i_coords), board.getTile(f_coords))
+     else return false;       
+    );
+  
+  --method to check if any player won already
+(*@
+\label{checkGameOver:41}
+@*)
+  public checkGameOver: () ==> bool
+  checkGameOver() == (
+   if((board.getTile([4,1]).getPiece() <> nil and board.getTile([4,1]).getPiece().getColor() = <Red>) or
+      (board.getTile([4,9]).getPiece() <> nil and board.getTile([4,9]).getPiece().getColor() = <Blue>))
+    then return true;
+   return false;
+  );
+   
+   --returns the actual gaming board
+(*@
+\label{getBoard:50}
+@*)
+  pure public getBoard : () ==> Board
+   getBoard() ==
+   (
+    return board;
+   );
+   
+   --returns the player whose turn it is to play
+(*@
+\label{getcurrentPlayer:57}
+@*)
+   pure public getcurrentPlayer : () ==> Player
+   getcurrentPlayer() ==
+   (
+    return currentPlayer;
+   );
+
+end Game
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Game:15]{Game} & 15&100.0\% & 3 \\
+\hline
+\hyperref[changePlayer:23]{changePlayer} & 23&100.0\% & 31 \\
+\hline
+\hyperref[checkGameOver:41]{checkGameOver} & 41&100.0\% & 19 \\
+\hline
+\hyperref[getBoard:50]{getBoard} & 50&100.0\% & 2 \\
+\hline
+\hyperref[getcurrentPlayer:57]{getcurrentPlayer} & 57&100.0\% & 3 \\
+\hline
+\hyperref[movePieceTo:32]{movePieceTo} & 32&100.0\% & 15 \\
+\hline
+\hline
+Game.vdmpp & & 100.0\% & 73 \\
+\hline
+\end{longtable}
+

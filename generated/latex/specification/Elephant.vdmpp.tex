@@ -1,0 +1,47 @@
+\begin{vdmpp}[breaklines=true]
+class Elephant is subclass of Piece
+/*
+class responsible for the pieces of type Elephant
+*/
+operations
+(*@
+\label{Elephant:6}
+@*)
+ public Elephant : Color * nat1 ==> Elephant
+   Elephant(a_color, a_value) ==(
+    Piece(a_color, a_value);
+   );
+   
+--checks if a piece in a certain tile can move to another one
+(*@
+\label{canMoveTo:12}
+@*)
+ public canMoveTo : Tile * Tile  ==> bool
+ canMoveTo(ti, tf) 
+  ==  if(
+       (
+       (abs(ti.getCoordinates()(1) - tf.getCoordinates()(1)) = 1 and ti.getCoordinates()(2) - tf.getCoordinates()(2) = 0) or 
+       (abs(ti.getCoordinates()(2) - tf.getCoordinates()(2)) = 1 and ti.getCoordinates()(1) - tf.getCoordinates()(1) = 0)
+       ) 
+      and tf.isRiver() = false)
+       then (return true) 
+    else (return false;)
+ pre ti <> tf;
+ 
+end Elephant
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Elephant:6]{Elephant} & 6&100.0\% & 10 \\
+\hline
+\hyperref[canMoveTo:12]{canMoveTo} & 12&100.0\% & 5 \\
+\hline
+\hline
+Elephant.vdmpp & & 100.0\% & 15 \\
+\hline
+\end{longtable}
+

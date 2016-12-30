@@ -1,0 +1,142 @@
+\begin{vdmpp}[breaklines=true]
+class Piece
+/*
+class responsible for the variables and operations of all the subclasses(types of pieces in the game)
+*/
+types
+ public Color = <Blue> | <Red>; -- Defines the player to whom that piece belong
+values
+-- Correspond to global variables such as PI
+instance variables
+ public color: Color;
+ public value: nat1;
+ 
+operations --Correspond to operations in UML, methods in Java, and memberfunctions in C++ 
+
+ --Piece constructor
+(*@
+\label{Piece:16}
+@*)
+ public Piece : Color * nat1 ==> Piece
+ Piece(a_color, a_value) ==(
+  color := a_color;
+  value := a_value;
+ );
+ 
+ --returns the color of the piece
+(*@
+\label{getColor:23}
+@*)
+ pure public getColor : () ==> Color
+ getColor() ==
+  return self.color;
+ 
+ --returns the color of the piece
+(*@
+\label{getValue:28}
+@*)
+ pure public getValue : () ==> nat1
+ getValue() ==
+  return self.value;
+  
+ --checks if a piece in a certain tile can move to another one
+(*@
+\label{canMoveTo:33}
+@*)
+ public canMoveTo : Tile * Tile  ==> bool
+ canMoveTo(ti, tf) 
+  == is subclass responsibility;
+  
+ --checks special types of movements across rivers horizontally (lions and tigers)
+(*@
+\label{isAllRiverH:38}
+@*)
+ public isAllRiverH: Tile * Tile ==> bool
+ isAllRiverH(ti, tf) == (
+
+  if(ti.getCoordinates()(2) = tf.getCoordinates()(2))   
+    then(
+    dcl tempx: nat1 := ti.getCoordinates()(1) + 1;  
+    
+    while (tempx < tf.getCoordinates()(1)) do(
+     dcl tempT: Tile := new Tile([tempx, ti.getCoordinates()(2)]);
+     if(tempT.isRiver() = false or is_Rat(tempT.getPiece()))
+      then (return false;)
+     else
+      tempx := tempx + 1;
+     );
+
+     return true;
+    )
+  else return false;
+ );
+ 
+ --checks special types of movements across rivers vertically (lions and tigers)
+(*@
+\label{isAllRiverV:59}
+@*)
+ public isAllRiverV: Tile * Tile ==> bool
+ isAllRiverV(ti, tf) == (
+ 
+   if(ti.getCoordinates()(1) = tf.getCoordinates()(1))
+    then(
+   
+    dcl tempy: nat1 := ti.getCoordinates()(2) + 1;  
+    
+    while (tempy < tf.getCoordinates()(2)) do(
+     dcl tempT: Tile := new Tile([ti.getCoordinates()(1), tempy]);
+     if((tempT.isRiver() = false) or (is_Rat(tempT.getPiece())))
+      then (return false;)
+     else
+      tempy := tempy + 1;
+     );
+
+     return true;
+      
+    )
+   else return false; 
+ );
+ 
+  --method used to, according all restrictions, change a piece from place
+(*@
+\label{movePieceTo:82}
+@*)
+  public movePieceTo: Tile * Tile ==> bool
+    movePieceTo(ti, tf) == (
+         if(ti.getPiece().canMoveTo(ti,tf))
+           then (
+            tf.setPiece(ti.getPiece());
+            ti.setPiece(nil);
+            return true;
+            )
+         else return false;     
+    )
+    pre ti.getPiece() <> nil;
+
+end Piece
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Piece:16]{Piece} & 16&100.0\% & 77 \\
+\hline
+\hyperref[canMoveTo:33]{canMoveTo} & 33&100.0\% & 2 \\
+\hline
+\hyperref[getColor:23]{getColor} & 23&100.0\% & 23 \\
+\hline
+\hyperref[getValue:28]{getValue} & 28&100.0\% & 34 \\
+\hline
+\hyperref[isAllRiverH:38]{isAllRiverH} & 38&100.0\% & 12 \\
+\hline
+\hyperref[isAllRiverV:59]{isAllRiverV} & 59&100.0\% & 7 \\
+\hline
+\hyperref[movePieceTo:82]{movePieceTo} & 82&100.0\% & 19 \\
+\hline
+\hline
+Piece.vdmpp & & 100.0\% & 174 \\
+\hline
+\end{longtable}
+

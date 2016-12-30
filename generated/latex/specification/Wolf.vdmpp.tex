@@ -1,0 +1,47 @@
+\begin{vdmpp}[breaklines=true]
+class Wolf is subclass of Piece
+/*
+class responsible for the pieces of type Wolf
+*/
+operations
+(*@
+\label{Wolf:6}
+@*)
+ public Wolf : Color * nat1 ==> Wolf
+   Wolf(a_color, a_value) ==(
+    Piece(a_color, a_value);
+   );
+   
+--checks if a piece in a certain tile can move to another one
+(*@
+\label{canMoveTo:12}
+@*)
+ public canMoveTo : Tile * Tile  ==> bool
+ canMoveTo(ti, tf) 
+  ==  if(
+       (
+       (abs(ti.getCoordinates()(1) - tf.getCoordinates()(1)) = 1 and ti.getCoordinates()(2) - tf.getCoordinates()(2) = 0) or 
+       (abs(ti.getCoordinates()(2) - tf.getCoordinates()(2)) = 1 and ti.getCoordinates()(1) - tf.getCoordinates()(1) = 0)
+       ) 
+      and tf.isRiver() = false)
+       then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue() or tf.isTrap() = true )) 
+    else (return false;)
+ pre ti <> tf;
+
+end Wolf
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Wolf:6]{Wolf} & 6&100.0\% & 8 \\
+\hline
+\hyperref[canMoveTo:12]{canMoveTo} & 12&100.0\% & 15 \\
+\hline
+\hline
+Wolf.vdmpp & & 100.0\% & 23 \\
+\hline
+\end{longtable}
+

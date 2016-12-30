@@ -1,0 +1,68 @@
+class Tile
+/*
+class responsible for the variables and operations of all the tiles that together form the game board
+*/
+instance variables
+		private traps: bool; --this tile has a trap
+		private river: bool; --this tile has water
+		private blue_lair: bool;
+		private red_lair: bool;
+		private coordinates: seq of nat1; --tile coordinates, integrity check with board coordinates
+		private piece: [Piece]; --Piece on tile, can be null if there is none
+		
+		inv coordinates(1) in set {1, ..., Board`XSize} and
+				coordinates(2) in set {1, ..., Board`YSize}
+		
+operations
+
+		--Tile constuctor
+		public Tile: seq of nat1 ==> Tile
+		Tile(coord) == (
+				coordinates := coord;
+				piece := nil;
+				traps := ((coord(1) = 3 and coord(2) = 1) or (coord(1) = 5 and coord(2) = 1) or (coord(1) = 4 and coord(2) = 2)
+										or (coord(1) = 3 and coord(2) = 9) or (coord(1) = 5 and coord(2) = 9) or (coord(1) = 4 and coord(2) = 8));
+				river := ((coord(1) = 2 and coord(2) = 4) or (coord(1) = 3 and coord(2) = 4) or (coord(1) = 5 and coord(2) = 4) or (coord(1) = 6 and coord(2) = 4)
+								or (coord(1) = 2 and coord(2) = 5) or (coord(1) = 3 and coord(2) = 5) or (coord(1) = 5 and coord(2) = 5) or (coord(1) = 6 and coord(2) = 5)
+								or (coord(1) = 2 and coord(2) = 6) or (coord(1) = 3 and coord(2) = 6) or (coord(1) = 5 and coord(2) = 6) or (coord(1) = 6 and coord(2) = 6));	
+				blue_lair := (coord(1) = 4 and coord(2) = 1);
+				red_lair := (coord(1) = 4 and coord(2) = 9);
+				return self;
+		);
+		
+		--Tile constructor with piece
+		public Tile: seq of nat1 * Piece ==> Tile
+				Tile(coord, p) == (
+				coordinates := coord;
+				traps := ((coord(1) = 3 and coord(2) = 1) or (coord(1) = 5 and coord(2) = 1) or (coord(1) = 4 and coord(2) = 2)
+										or (coord(1) = 3 and coord(2) = 9) or (coord(1) = 5 and coord(2) = 9) or (coord(1) = 4 and coord(2) = 8));
+				river := ((coord(1) = 2 and coord(2) = 4) or (coord(1) = 3 and coord(2) = 4) or (coord(1) = 5 and coord(2) = 4) or (coord(1) = 6 and coord(2) = 4)
+								or (coord(1) = 2 and coord(2) = 5) or (coord(1) = 3 and coord(2) = 5) or (coord(1) = 5 and coord(2) = 5) or (coord(1) = 6 and coord(2) = 5)
+								or (coord(1) = 2 and coord(2) = 6) or (coord(1) = 3 and coord(2) = 6) or (coord(1) = 5 and coord(2) = 6) or (coord(1) = 6 and coord(2) = 6));
+				blue_lair := (coord(1) = 4 and coord(2) = 1);
+				red_lair := (coord(1) = 4 and coord(2) = 9);	
+				piece := p;
+				return self
+		);
+		
+		--returns the coordinates of that tile
+		pure public getCoordinates: () ==> seq of nat1
+		getCoordinates() == return coordinates;
+		
+		--returns the piece in that tile
+		pure public getPiece: () ==> [Piece]
+		getPiece() == return piece;
+		
+		--returns whether on that tile lies a trap or not
+		pure public isTrap: () ==> bool
+		isTrap() == return traps;
+		
+		--returns whether that trap is a river or not
+		pure public isRiver: () ==> bool
+		isRiver() == return river;
+		
+		--method to set the piece that lies on the tile
+		public setPiece: [Piece] ==> ()
+		setPiece(p) == piece := p;
+		
+end Tile

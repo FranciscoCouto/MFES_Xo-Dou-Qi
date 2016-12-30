@@ -1,0 +1,48 @@
+\begin{vdmpp}[breaklines=true]
+class Rat is subclass of Piece
+/*
+class responsible for the pieces of type Rat
+*/
+operations
+(*@
+\label{Rat:6}
+@*)
+ public Rat : Color * nat1 ==> Rat
+   Rat(a_color, a_value) ==(
+    Piece(a_color, a_value);
+   );
+   
+ --checks if a piece in a certain tile can move to another one
+(*@
+\label{canMoveTo:12}
+@*)
+ public canMoveTo : Tile * Tile  ==> bool
+ canMoveTo(ti, tf) 
+  ==  if(
+       (
+       (abs(ti.getCoordinates()(1) - tf.getCoordinates()(1)) = 1 and ti.getCoordinates()(2) - tf.getCoordinates()(2) = 0) or 
+       (abs(ti.getCoordinates()(2) - tf.getCoordinates()(2)) = 1 and ti.getCoordinates()(1) - tf.getCoordinates()(1) = 0)
+       ))
+      then (return (tf.getPiece() = nil or ti.getPiece().getValue() >= tf.getPiece().getValue()) 
+      or (is_Rat(ti.getPiece()) and is_Elephant(tf.getPiece()) and (ti.isRiver() = false))
+      or (tf.isTrap() = true);) 
+    else (return false;)
+ pre ti <> tf;
+  
+end Rat
+\end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Rat:6]{Rat} & 6&100.0\% & 16 \\
+\hline
+\hyperref[canMoveTo:12]{canMoveTo} & 12&100.0\% & 8 \\
+\hline
+\hline
+Rat.vdmpp & & 100.0\% & 24 \\
+\hline
+\end{longtable}
+

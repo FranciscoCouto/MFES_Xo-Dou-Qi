@@ -39,9 +39,9 @@ public class Main {
 	         int fx = in.nextInt();  // array index starts at 0 instead of 1
 	         int fy = in.nextInt();
 	         
-	         if(game.movePieceTo(SeqUtil.seq(ix, iy), SeqUtil.seq(fx, fy))
-	        		 && ix >= 1 && ix <= COLS && iy >= 1 && iy <= ROWS 
-	        		 && fx >= 1 && fx <= COLS && fy >= 1 && fy <= ROWS ){
+	         if(ix >= 1 && ix <= COLS && iy >= 1 && iy <= ROWS 
+	        		 && fx >= 1 && fx <= COLS && fy >= 1 && fy <= ROWS 
+	        		 && game.movePieceTo(SeqUtil.seq(ix, iy), SeqUtil.seq(fx, fy))){
 	        	   validInput = true;  // input okay, exit loop
 	         } else {
 	            System.out.println("This move is not valid. Try again...");
